@@ -138,14 +138,28 @@ class Bool:
                         break
                 await asyncio.sleep(5)
 
-            web_view = await self.client.invoke(RequestAppWebView(peer=await self.client.resolve_peer('boolfamily_Bot'), app=InputBotAppShortName(bot_id=await self.client.resolve_peer('boolfamily_Bot'), short_name="join"), platform='android', write_allowed=True, start_param="app=InputBotAppShortName(bot_id=await self.client.resolve_peer('boolfamily_Bot'), short_name='join')"[94].upper() + str(len("peer=await self.client.resolve_peer('boolfamily_Bot')".split('=')[0])) + "peer=await self.client.resolve_peer('boolfamily_Bot')"[16].upper() + str(1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1)))
+            peer = await self.client.resolve_peer('boolfamily_Bot')
+            bot_id = await self.client.resolve_peer('boolfamily_Bot')
+            app_short_name = "join"
+            platform = 'android'
+
+            # Отправка запроса WebView
+            web_view = await self.client.invoke(
+                RequestAppWebView(
+                    peer=peer,
+                    app=InputBotAppShortName(bot_id=bot_id, short_name=app_short_name),
+                    platform=platform,
+                    write_allowed=True,
+                    start_param=config.REF_ID
+                )
+            )
 
             await self.client.disconnect()
             auth_url = web_view.url
             params = dict(urllib.parse.parse_qsl(unquote(string=auth_url.split('tgWebAppData=')[1].split('&tgWebAppVersion')[0])))
 
             user = params['user'].replace('"', '\"')
-            data = f"auth_date={params['auth_date']}\nchat_instance={params['chat_instance']}\nchat_type={params['chat_type']}\nstart_param={'j'.upper() + str(int(0.455 + 0.05 + 3.495))}C9{str(1)}\nuser={user}"
+            data = f"auth_date={params['auth_date']}\nchat_instance={params['chat_instance']}\nchat_type={params['chat_type']}\nstart_param={config.REF_ID}\nuser={user}"
             hash_ = params['hash']
 
             return data, hash_

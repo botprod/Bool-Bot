@@ -2,6 +2,7 @@
 API_ID = 1488
 API_HASH = 'abcde1488'
 
+REF_ID = '6K2PY'
 
 DELAYS = {
     'ACCOUNT': [5, 15],  # delay between connections to accounts (the more accounts, the longer the delay)
